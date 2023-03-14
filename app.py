@@ -77,7 +77,7 @@ def app():
     st.sidebar.write("""
             ## About
             
-            Career Plot aims to empower job seekers and employees by providing accurate and reliable information on salaries and compensation for different professions and industries. By leveraging the latest data analysis techniques and machine learning algorithms, we can help users make informed decisions about their career paths and negotiate fair compensation packages with their current or prospective employers.
+            Career Plot aims to empower job seekers and employees by providing accurate and reliable information on salaries for different professions and industries. By leveraging the latest data analysis techniques and machine learning algorithms, we can help users make informed decisions about their career paths.
             
             Contact me [here](mailto:ramyalather@gmail.com) or consider contributing to the [GitHub](https://github.com/remz05/Career-Plot) repository with any suggestions or questions. 
         """)
