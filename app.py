@@ -138,7 +138,6 @@ def app():
             try:
                 plot_peer_salary_path(df_graph, user_input)
                 
-            
             except TypeError:
                 st.write(f'Fill in all details')
       
