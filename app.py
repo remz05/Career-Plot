@@ -74,7 +74,13 @@ def app():
     st.sidebar.title("CAREER PLOT")
     st.sidebar.markdown("Created by [Ramya Lather](https://www.linkedin.com/in/ramya-lather/)")
     active_tab = st.sidebar.radio("", ["Salary 💰", "Career Trajectory" , "Machine Learning behind Career Plot"])
-
+    st.sidebar.write("""
+            ## About
+            
+            Career Plot aims to empower job seekers and employees by providing accurate and reliable information on salaries and compensation for different professions and industries. By leveraging the latest data analysis techniques and machine learning algorithms, we can help users make informed decisions about their career paths and negotiate fair compensation packages with their current or prospective employers.
+            
+            Contact me [here](mailto:ramyalather@gmail.com) or consider contributing to the [GitHub](https://github.com/remz05/Career-Plot) repository with any suggestions or questions. 
+        """)
     if active_tab == "Salary 💰":
         
         st.write(f'**:gray[Type in your job title and get a prediction of its salary as per market]**')
@@ -88,13 +94,14 @@ def app():
                 st.write(message, unsafe_allow_html=True)
                 st.write(f'')
                 st.write(f'')
+                st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page for more.')
                 
             except TypeError:
                 st.write(f'Sorry, the job title provided is very specific, request you to type a more general title.')  
-        st.write(f'Career Plot aims to empower job seekers and employees by providing accurate and reliable information on salaries and compensation for different professions and industries. By leveraging the latest data analysis techniques and machine learning algorithms, we can help users make informed decisions about their career paths and negotiate fair compensation packages with their current or prospective employers.')
-        st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page for more.')
-        st.write(f'Ultimately, our goal is to help job seekers and employees make informed decisions about their careers and maximize their earning potential. We believe that by providing accurate and reliable salary information, we can help to level the playing field and promote greater transparency in the job market.')
-        st.write(f'')      
+        
+       
+        #st.write(f'Ultimately, our goal is to help job seekers and employees make informed decisions about their careers and maximize their earning potential. We believe that by providing accurate and reliable salary information, we can help to level the playing field and promote greater transparency in the job market.')
+        #st.write(f'')      
             
            
         
