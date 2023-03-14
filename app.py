@@ -89,7 +89,7 @@ def app():
                 st.write(f'')
                 st.write(f'')
                 
-             except TypeError:
+            except TypeError:
                 st.write(f'Sorry, the job title provided is very specific, request you to type a more general title.')  
          st.write(f'Career Plot aims to empower job seekers and employees by providing accurate and reliable information on salaries and compensation for different professions and industries. By leveraging the latest data analysis techniques and machine learning algorithms, we can help users make informed decisions about their career paths and negotiate fair compensation packages with their current or prospective employers.')
          st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page for more.')
