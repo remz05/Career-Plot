@@ -86,21 +86,25 @@ def app():
                 st.write(f'')
                 message = f"<span style='font-size: 24px; color: #ADD8E6;'>The salary for {job_title} is ${salary}</span>"
                 st.write(message, unsafe_allow_html=True)
-                
-                st.write(f'Career Plot aims to empower job seekers and employees by providing accurate and reliable information on salaries and compensation for different professions and industries. By leveraging the latest data analysis techniques and machine learning algorithms, we can help users make informed decisions about their career paths and negotiate fair compensation packages with their current or prospective employers.')
-                st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page for more.')
-                st.write(f'Ultimately, our goal is to help job seekers and employees make informed decisions about their careers and maximize their earning potential. We believe that by providing accurate and reliable salary information, we can help to level the playing field and promote greater transparency in the job market.')
                 st.write(f'')
-            
-            except TypeError:
+                st.write(f'')
+                
+             except TypeError:
                     st.write(f'Sorry, the job title provided is very specific, request you to type a more general title.')  
+         st.write(f'Career Plot aims to empower job seekers and employees by providing accurate and reliable information on salaries and compensation for different professions and industries. By leveraging the latest data analysis techniques and machine learning algorithms, we can help users make informed decisions about their career paths and negotiate fair compensation packages with their current or prospective employers.')
+         st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page for more.')
+         st.write(f'Ultimately, our goal is to help job seekers and employees make informed decisions about their careers and maximize their earning potential. We believe that by providing accurate and reliable salary information, we can help to level the playing field and promote greater transparency in the job market.')
+         st.write(f'')      
+            
+           
         
     if active_tab == "Career Trajectory":
         st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
-     
-        industry_category = st.selectbox('Industry',( 'Select one', 'computers', 'entertainment', 'retail', 'finance', 'management',
-               'engineering', 'science', 'healthcare', 'legal', 'electronics',
-               'art', 'operations', 'other', 'military', 'analytics'))
+        st.write(f'')
+        st.write(f'The career graph changes as you type in more information about a profile. It is highly recommended to fill **:blue[Industry]** and **:blue[UG Specialization]** fields')
+        industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
+               'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
+               'Art', 'Operations', 'Military', 'Analytics', 'Other'))
         st.write(f'')
         st.write(f'Undergraduate Education')
         col1, col2, col3 = st.columns(3)
@@ -108,24 +112,24 @@ def app():
             ug_school = st.text_input('UG School', placeholder= 'Type your response')
          
         with col2:
-            ug_degree = st.selectbox('Specialisation',('Select one','science', 'arts', 'business', 'other'))
+            ug_degree = st.selectbox('Specialisation',('Select one','Science', 'Arts', 'Business', 'Other'))
         
         with col3:
-            ug_grad_year = st.text_input('Completion Year  (eg: 2009)', placeholder= 'Type your response')
+            ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', placeholder= 'Type your response')
         st.write(f'') 
         st.write(f'Postgraduate Education')
         col1, col2 = st.columns([2,1])   
         with col1:
             mba_school = st.text_input('PG School  (eg: Harvard Business School)', placeholder= 'Type your response')
         with col2:
-            grad_year = st.text_input('Completion Year  (eg: 2019)', placeholder= 'Type your response')
+            grad_year = st.text_input('Completion Year  (Format: YYYY)', placeholder= 'Type your response')
             
             
             
         st.write(f'')
-        experience = st.text_input('Years of work experience since your post-graduation  (eg: 3)', placeholder= 'Type your response')
+        experience = st.text_input('Years of work experience since your post-graduation  (Format: Integer)', placeholder= 'Type your response')
         st.write(f'')
-        gender = st.selectbox('(optional) Gender',('Select one', 'male', 'female', 'other'))
+        gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
 
         user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': ug_grad_year, 'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender' : gender})
 
