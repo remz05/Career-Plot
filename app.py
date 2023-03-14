@@ -115,14 +115,14 @@ def app():
             ug_degree = st.selectbox('Specialisation',('Select one','Science', 'Arts', 'Business', 'Other'))
         
         with col3:
-            ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', placeholder= 'Type your response')
+            ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', key='grad_year_input', placeholder= 'Type your response')
         st.write(f'') 
         st.write(f'Postgraduate Education')
         col1, col2 = st.columns([2,1])   
         with col1:
             mba_school = st.text_input('PG School  (eg: Harvard Business School)', placeholder= 'Type your response')
         with col2:
-            grad_year = st.text_input('Completion Year  (Format: YYYY)', placeholder= 'Type your response')
+            grad_year = st.text_input('Completion Year (Format: YYYY)', key='post_grad_year_input', placeholder= 'Type your response')
             
             
             
