@@ -155,5 +155,5 @@ if __name__ == '__main__':
     with zipfile.ZipFile('data/graph_data.csv.zip', 'r') as zip_ref:
         zip_ref.extractall('data/')
         
-    df_raw = pd.read_csv('data/graph_data.csv')
+    df_graph = pd.read_csv('data/graph_data.csv')
     app()
