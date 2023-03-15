@@ -94,7 +94,7 @@ def app():
                 st.write(message, unsafe_allow_html=True)
                 st.write(f'')
                 st.write(f'')
-                st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page for more.')
+                st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page in the left sidebar for more.')
                 
             except TypeError:
                 st.write(f'Sorry, the job title provided is very specific, request you to type a more general title.')  
