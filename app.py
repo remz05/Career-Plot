@@ -168,7 +168,7 @@ def app():
         st.subheader("Metrics")
         st.write(f"To evaluate the performance of Career Plot, we conducted experiments on a dataset of 6500 unique  job titles. The dataset was split into 80% training data and 20% testing data. We measured the accuracy of the random forest model by calculating the mean absolute error percentage (MAPE) and the R-squared score (R2). The MAPE and R2 values for the training and testing data were 28% , 0.49 and 35% , 0.39 , respectively. The graph below plots the actual and predicted salaries of the test data and shows a correlation between the two. ")
         st.write(f'')
-        image = Image.open('images/ML_graph.jpeg')
+        image = Image.open('images/ML_graph.png')
         st.image(image)
         st.write(f'')
         st.write(f'The tool has also accurately predicted career advancement opportunities for users, identifying job titles that are relevant to their career goals and providing insights into potential salary growth opportunities.')   
