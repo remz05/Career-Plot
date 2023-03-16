@@ -73,7 +73,7 @@ def app():
     st.image(image)
     st.sidebar.title("CAREER PLOT")
     st.sidebar.markdown("Created by [Ramya Lather](https://www.linkedin.com/in/ramya-lather/)")
-    active_tab = st.sidebar.radio("", ["Salary 💰", "Career Trajectory" , "Machine Learning behind Career Plot"])
+    active_tab = st.sidebar.radio("", ["Salary 💰", "Career Trajectory" , "Machine Learning behind Career Plot", "Know more about Career Plot"])
     st.sidebar.write("""
             ## About
             
@@ -149,16 +149,42 @@ def app():
                 st.write(f'Fill in all details')
       
     if active_tab == "Machine Learning behind Career Plot":
-        #st.markdown("The Machine Learning behind Career Plot")
-        st.write("Below is the architecture behind Career Plot. Consider the job title text - “Associate ” entered by the user. Two set of features are extracted from this text. First, Google word to vec is used to derive 300 dimensional vector representation that captures semantic meaning of the job title text. Second, Page Rank on observed job switches is used to assign relative importance ranks to 1000 most common jobs. Then we use k nearest neighbour to extrapolate rank to all jobs.")
+        #st.write("Below is the architecture behind Career Plot. Consider the job title text - “Associate ” entered by the user. Two set of features are extracted from this text. First, Google word to vec is used to derive 300 dimensional vector representation that captures semantic meaning of the job title text. Second, Page Rank on observed job switches is used to assign relative importance ranks to 1000 most common jobs. Then we use k nearest neighbour to extrapolate rank to all jobs.")
+        st.subheader("Methodology")
+        st.write(f'Career plot is drawn on profile data collected from LinkedIn and salary data collected from Glassdoor. The data consists of professionals across various industries and educational backgrounds, Masters in Business Administration being the commonality for all.') 
+        st.write('Its methodology consists of three steps: feature extraction, random forest model training, and career trajectory analysis. The feature extraction step involves extracting semantic and order information from the job title text. The semantic information is captured using Google Word2Vec, which maps the job title text into a 300-dimensional vector space that captures the meaning of the text. The order information is captured using PageRank on observed job switches, which assigns relative importance ranks to 1000 most common jobs.Then KNN (K nearest neighbor) model is used to extrapolate rank to all jobs.') 
         st.write(f'')
-        st.write("A combination of the semantic information in 300 dimensional vectors and order information in job rank will form the feature matrix of the ML random forest model. This predicts the salary for the user’s job role. Our database consists of salaries for more than 100,000 unique job titles. In addition to predicting salary for a job title, the tool also builds a career trajectory based on your profile.") 
-        st.write(f'')
-        image = Image.open('images/ml_architecture.jpeg')
+        image = Image.open('images/job_rank.png')
         st.image(image)
+        st.write(f'')
+        image = Image.open('images/Word_plot.png')
+        st.image(image)
+        st.write(f'')
+        
+        #st.write("A combination of the semantic information in 300 dimensional vectors and order information in job rank will form the feature matrix of the ML random forest model. This predicts the salary for the user’s job role. Our database consists of salaries for more than 100,000 unique job titles. In addition to predicting salary for a job title, the tool also builds a career trajectory based on your profile.") 
+        st.write(f"The next step involves training a random forest model using the feature matrix that combines semantic and order information. The model predicts the salary for the user's job role by leveraging a database of over 100,000 unique job titles.")
+        st.write(f"Finally, Career Plot builds a career trajectory based on the user's profile. This trajectory analysis can provide insights into career advancement opportunities and potential salary growth. ")
+        st.write(f'')
+        st.subheader("Metrics")
+        st.write(f"To evaluate the performance of Career Plot, we conducted experiments on a dataset of 6500 unique  job titles. The dataset was split into 80% training data and 20% testing data. We measured the accuracy of the random forest model by calculating the mean absolute error percentage (MAPE) and the R-squared score (R2). The MAPE and R2 values for the training and testing data were 28% , 0.49 and 35% , 0.39 , respectively. The graph below plots the actual and predicted salaries of the test data and shows a correlation between the two. ")
+        st.write(f'')
+        image = Image.open('images/ML_graph.jpeg')
+        st.image(image)
+        st.write(f'')
+        st.write(f'The tool has also accurately predicted career advancement opportunities for users, identifying job titles that are relevant to their career goals and providing insights into potential salary growth opportunities.')   
+        
+     
+    if active_tab == "Know more about Career Plot":
+        st.subheader("Introduction")
+        st.write ("In today's job market, individuals need to make informed career decisions to achieve their career goals. Career Plot is a machine learning tool that predicts salaries and builds career trajectories based on job title semantics and order information. The tool is designed to help individuals make informed career decisions by providing insights into salary growth opportunities and career advancement paths.')
+        st.write('Career Plot is a valuable tool for individuals and organizations looking to make informed career decisions. With the ability to predict salaries for over 100,000 unique job titles, Career Plot can be a powerful resource for job seekers and employers alike.')
+        st.write(f'')
+        st.subheader("Recommendations")
+        st.write('1. Use Career Plot to research potential career paths and identify job titles that align with your career goals.')
+        st.write('2. Use Career Plot to negotiate salaries and understand the market value of your job title.')
+        st.write('3. Use Career Plot to develop career paths for your employees and promote professional development within your organization.')
        
-    
-    
+
     
 if __name__ == '__main__':
     df = pd.read_csv('data/job_salary.csv')
