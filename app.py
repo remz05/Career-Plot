@@ -176,7 +176,7 @@ def app():
      
     if active_tab == "Know more about Career Plot":
         st.subheader("Introduction")
-        st.write ("In today's job market, individuals need to make informed career decisions to achieve their career goals. Career Plot is a machine learning tool that predicts salaries and builds career trajectories based on job title semantics and order information. The tool is designed to help individuals make informed career decisions by providing insights into salary growth opportunities and career advancement paths.')
+        st.write ("In today's job market, individuals need to make informed career decisions to achieve their career goals. Career Plot is a machine learning tool that predicts salaries and builds career trajectories based on job title semantics and order information. The tool is designed to help individuals make informed career decisions by providing insights into salary growth opportunities and career advancement paths.")
         st.write('Career Plot is a valuable tool for individuals and organizations looking to make informed career decisions. With the ability to predict salaries for over 100,000 unique job titles, Career Plot can be a powerful resource for job seekers and employers alike.')
         st.write(f'')
         st.subheader("Recommendations")
