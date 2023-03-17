@@ -99,23 +99,12 @@ def app():
             except TypeError:
                 st.write(f'Sorry, the job title provided is very specific, request you to type a more general title.')  
         
-#         c1, c2, c3 = st.columns(3)
-#         with c1:
-#             st.markdown(f"<a href='#career'>Career Trajectory</a>", unsafe_allow_html=True)
-#         with c2:
-#             st.markdown(f"<a href='#ml'>Machine Learning behind Career Plot</a>", unsafe_allow_html=True)
-      
-#         with c3:
-#             st.markdown(f"<a href='#more'>Know more about Career Plot</a>", unsafe_allow_html=True)
-            
-        
-        #st.write(f'Ultimately, our goal is to help job seekers and employees make informed decisions about their careers and maximize their earning potential. We believe that by providing accurate and reliable salary information, we can help to level the playing field and promote greater transparency in the job market.')
-        #st.write(f'')      
+
             
            
         
     if active_tab == "Career Trajectory":
-        #st.write("<h1 id='career'>Career Trajectory</h1>", unsafe_allow_html=True)
+       
         st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
         st.write(f'')
         st.write(f'The career graph changes as you type in more information about a profile. It is highly recommended to fill **:blue[Industry]** and **:blue[UG Specialization]** fields')
@@ -159,8 +148,7 @@ def app():
                 st.write(f'Fill in all details')
       
     if active_tab == "Machine Learning behind Career Plot":
-        #st.write("<h1 id='ml'>Machine Learning behind Career Plot</h1>", unsafe_allow_html=True)
-        #st.write("Below is the architecture behind Career Plot. Consider the job title text - “Associate ” entered by the user. Two set of features are extracted from this text. First, Google word to vec is used to derive 300 dimensional vector representation that captures semantic meaning of the job title text. Second, Page Rank on observed job switches is used to assign relative importance ranks to 1000 most common jobs. Then we use k nearest neighbour to extrapolate rank to all jobs.")
+        
         st.subheader("Methodology")
         st.write(f'Career plot is drawn on profile data collected from LinkedIn and salary data collected from Glassdoor. The data consists of professionals across various industries and educational backgrounds, Masters in Business Administration being the commonality for all.') 
         st.write('Its methodology consists of three steps: feature extraction, random forest model training, and career trajectory analysis. The feature extraction step involves extracting semantic and order information from the job title text. The semantic information is captured using Google Word2Vec, which maps the job title text into a 300-dimensional vector space that captures the meaning of the text. The order information is captured using PageRank on observed job switches, which assigns relative importance ranks to 1000 most common jobs.Then KNN (K nearest neighbor) model is used to extrapolate rank to all jobs.') 
@@ -172,7 +160,7 @@ def app():
         st.image(image)
         st.write(f'')
         
-        #st.write("A combination of the semantic information in 300 dimensional vectors and order information in job rank will form the feature matrix of the ML random forest model. This predicts the salary for the user’s job role. Our database consists of salaries for more than 100,000 unique job titles. In addition to predicting salary for a job title, the tool also builds a career trajectory based on your profile.") 
+        
         st.write(f"The next step involves training a random forest model using the feature matrix that combines semantic and order information. The model predicts the salary for the user's job role by leveraging a database of over 100,000 unique job titles.")
         st.write(f"Finally, Career Plot builds a career trajectory based on the user's profile. This trajectory analysis can provide insights into career advancement opportunities and potential salary growth. ")
         st.write(f'')
@@ -186,7 +174,7 @@ def app():
         
      
     if active_tab == "Know more about Career Plot":
-        #st.write("<h1 id='more'>Know more about Career Plot</h1>", unsafe_allow_html=True)
+        
         st.subheader("Introduction")
         st.write ("In today's job market, individuals need to make informed career decisions to achieve their career goals. Career Plot is a machine learning tool that predicts salaries and builds career trajectories based on job title semantics and order information. The tool is designed to help individuals make informed career decisions by providing insights into salary growth opportunities and career advancement paths.")
         st.write('Career Plot is a valuable tool for individuals and organizations looking to make informed career decisions. With the ability to predict salaries for over 100,000 unique job titles, Career Plot can be a powerful resource for job seekers and employers alike.')
@@ -196,7 +184,7 @@ def app():
         st.write('2. Use Career Plot to negotiate salaries and understand the market value of your job title.')
         st.write('3. Use Career Plot to develop career paths for your employees and promote professional development within your organization.')
         st.write(f'')
-        st.write(f'To walk you through the process behind the hood, here is the ML architecture on which Career Plot is built. Click on the **blue:[Machine Learning behind Career PLot]** section to get into the details')
+        st.write(f'To walk you through the process behind the hood, here is the ML architecture on which Career Plot is built. Click on the **:blue[Machine Learning behind Career PLot]** section to get into the details')
         image = Image.open('images/ml_architecture.jpeg')
         st.image(image)
     
