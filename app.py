@@ -101,11 +101,13 @@ def app():
         
         c1, c2, c3 = st.columns(3)
         with c1:
-            st.markdown("[Career Trajectory](#career)")
+            st.markdown(f"<a href='#career'>Career Trajectory</a>", unsafe_allow_html=True)
         with c2:
-            st.markdown("[Machine Learning behind Career Plot](#ml)")
+            st.markdown(f"<a href='#ml'>Machine Learning behind Career Plot</a>", unsafe_allow_html=True)
+      
         with c3:
-            st.sidebar.markdown("[Know more about Career Plot](#more)")
+            st.markdown(f"<a href='#more'>Know more about Career Plot</a>", unsafe_allow_html=True)
+            
         
         #st.write(f'Ultimately, our goal is to help job seekers and employees make informed decisions about their careers and maximize their earning potential. We believe that by providing accurate and reliable salary information, we can help to level the playing field and promote greater transparency in the job market.')
         #st.write(f'')      
