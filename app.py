@@ -89,11 +89,11 @@ def app():
         if job_title:
             try:
                 salary = int(df[df['clean_jobtitle'] == job_title.lower()]['jobSalary'].values)
-                st.write(f'')
+                #st.write(f'')
                 message = f"<span style='font-size: 24px; color: #ADD8E6;'>The salary for {job_title} is ${salary}</span>"
                 st.write(message, unsafe_allow_html=True)
-                st.write(f'')
-                st.write(f'')
+                #st.write(f'')
+                #st.write(f'')
                 st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page in the left sidebar for more.')
                 
             except TypeError:
@@ -106,12 +106,12 @@ def app():
     if active_tab == "Career Trajectory":
        
         st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
-        st.write(f'')
+        #st.write(f'')
         st.write(f'The career graph changes as you type in more information about a profile. It is highly recommended to fill **:blue[Industry]** and **:blue[UG Specialization]** fields')
         industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
                'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
                'Art', 'Operations', 'Military', 'Analytics', 'Other'))
-        st.write(f'')
+        #st.write(f'')
         st.write(f'Undergraduate Education')
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -122,7 +122,7 @@ def app():
         
         with col3:
             ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', key='grad_year_input', placeholder= 'Type your response')
-        st.write(f'') 
+        #st.write(f'') 
         st.write(f'Postgraduate Education')
         col1, col2 = st.columns([2,1])   
         with col1:
@@ -132,9 +132,9 @@ def app():
             
             
             
-        st.write(f'')
+        #st.write(f'')
         experience = st.text_input('Years of work experience since your post-graduation  (Format: Integer)', placeholder= 'Type your response')
-        st.write(f'')
+        #st.write(f'')
         gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
 
         user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': ug_grad_year, 'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender' : gender})
@@ -152,24 +152,24 @@ def app():
         st.subheader("Methodology")
         st.write(f'Career plot is drawn on profile data collected from LinkedIn and salary data collected from Glassdoor. The data consists of professionals across various industries and educational backgrounds, Masters in Business Administration being the commonality for all.') 
         st.write('Its methodology consists of three steps: feature extraction, random forest model training, and career trajectory analysis. The feature extraction step involves extracting semantic and order information from the job title text. The semantic information is captured using Google Word2Vec, which maps the job title text into a 300-dimensional vector space that captures the meaning of the text. The order information is captured using PageRank on observed job switches, which assigns relative importance ranks to 1000 most common jobs.Then KNN (K nearest neighbor) model is used to extrapolate rank to all jobs.') 
-        st.write(f'')
+        #st.write(f'')
         image = Image.open('images/job_rank.png')
         st.image(image)
-        st.write(f'')
+        #st.write(f'')
         image = Image.open('images/Word_plot.png')
         st.image(image)
-        st.write(f'')
+        #st.write(f'')
         
         
         st.write(f"The next step involves training a random forest model using the feature matrix that combines semantic and order information. The model predicts the salary for the user's job role by leveraging a database of over 100,000 unique job titles.")
         st.write(f"Finally, Career Plot builds a career trajectory based on the user's profile. This trajectory analysis can provide insights into career advancement opportunities and potential salary growth. ")
-        st.write(f'')
+        #st.write(f'')
         st.subheader("Metrics")
         st.write(f"To evaluate the performance of Career Plot, we conducted experiments on a dataset of 6500 unique  job titles. The dataset was split into 80% training data and 20% testing data. We measured the accuracy of the random forest model by calculating the mean absolute error percentage (MAPE) and the R-squared score (R2). The MAPE and R2 values for the training and testing data were 28% , 0.49 and 35% , 0.39 , respectively. The graph below plots the actual and predicted salaries of the test data and shows a correlation between the two. ")
-        st.write(f'')
+        #st.write(f'')
         image = Image.open('images/ML_graph.png')
         st.image(image)
-        st.write(f'')
+        #st.write(f'')
         st.write(f'The tool has also accurately predicted career advancement opportunities for users, identifying job titles that are relevant to their career goals and providing insights into potential salary growth opportunities.')   
         
      
@@ -178,12 +178,12 @@ def app():
         st.subheader("Introduction")
         st.write ("In today's job market, individuals need to make informed career decisions to achieve their career goals. Career Plot is a machine learning tool that predicts salaries and builds career trajectories based on job title semantics and order information. The tool is designed to help individuals make informed career decisions by providing insights into salary growth opportunities and career advancement paths.")
         st.write('Career Plot is a valuable tool for individuals and organizations looking to make informed career decisions. With the ability to predict salaries for over 100,000 unique job titles, Career Plot can be a powerful resource for job seekers and employers alike.')
-        st.write(f'')
+        #st.write(f'')
         st.subheader("Recommendations")
         st.write('1. Use Career Plot to research potential career paths and identify job titles that align with your career goals.')
         st.write('2. Use Career Plot to negotiate salaries and understand the market value of your job title.')
         st.write('3. Use Career Plot to develop career paths for your employees and promote professional development within your organization.')
-        st.write(f'')
+        #st.write(f'')
         st.write(f'To walk you through the process behind the hood, here is the ML architecture on which Career Plot is built. Click on the **:blue[Machine Learning behind Career PLot]** section to get into the details')
         image = Image.open('images/ml_architecture.jpeg')
         st.image(image)
