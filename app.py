@@ -88,7 +88,7 @@ def app():
         search_button = st.button("Search")
         if job_title:
             try:
-                salary = int(df[df['clean_jobtitle'] == job_title.lower()]['jobSalary'].values)
+                salary = int(df[df['clean_jobtitle'] == job_title.lower()]['jobSalary'].values[0])
                 #st.write(f'')
                 message = f"<span style='font-size: 24px; color: #ADD8E6;'>The salary for {job_title} is ${salary}</span>"
                 st.write(message, unsafe_allow_html=True)
