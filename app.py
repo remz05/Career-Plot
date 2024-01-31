@@ -219,7 +219,7 @@ def app():
             
        
 
-        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender': gender})
+        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender': gender.lower()})
 
 
         if user_input:
