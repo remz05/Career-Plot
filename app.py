@@ -77,6 +77,7 @@ def plot_peer_salary_path(dataframe ,user_input):
 
     # Add the "training sample does not have enough values" text as an annotation to the figure
     if size < 10:
+        st.write(f'size is :{size}')
         st.write(f':orange[Our training sample does not have enough values for your specific profile but here is the most common career trajectory across all profiles]')
         
     #Set the axis labels and title
