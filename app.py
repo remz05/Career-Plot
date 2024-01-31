@@ -177,20 +177,20 @@ def app():
         st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
         #st.write(f'')
         st.write(f'The career graph changes as you type in more information about a profile. It is highly recommended to fill **:blue[Industry]** and **:blue[UG Specialization]** fields')
-        industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
-               'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
-               'Art', 'Operations', 'Military', 'Analytics', 'Other'))
+        # #industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
+        #        'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
+        #        'Art', 'Operations', 'Military', 'Analytics', 'Other'))
         #st.write(f'')
-        st.write(f'Undergraduate Education')
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            ug_school = st.text_input('UG School', placeholder= 'Type your response')
+        # st.write(f'Undergraduate Education')
+        # col1, col2, col3 = st.columns(3)
+        # with col1:
+        #     ug_school = st.text_input('UG School', placeholder= 'Type your response')
          
-        with col2:
-            ug_degree = st.selectbox('Specialisation',('Select one','Science', 'Arts', 'Business', 'Other'))
+        # with col2:
+        #     ug_degree = st.selectbox('Specialisation',('Select one','Science', 'Arts', 'Business', 'Other'))
         
-        with col3:
-            ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', key='grad_year_input', placeholder= 'Type your response')
+        # with col3:
+        #     ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', key='grad_year_input', placeholder= 'Type your response')
         #st.write(f'') 
         st.write(f'Postgraduate Education')
         col1, col2 = st.columns([2,1])   
@@ -208,7 +208,7 @@ def app():
 
         
         try:
-            ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
+            #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
             grad_year_int = int(grad_year) if grad_year else 0
             experience_int = int(experience) if experience else 0
         except ValueError:
@@ -217,7 +217,7 @@ def app():
             
        
 
-        user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': ug_grad_year_int, 'mba_school': mba_school.lower(), 'grad_year':grad_year_int, 'experience': experience_int, 'gender': gender})
+        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year_int, 'experience': experience_int, 'gender': gender})
 
 
         if user_input:
@@ -268,7 +268,7 @@ def app():
     
 if __name__ == '__main__':
     df = pd.read_csv('data/job_salary.csv')
-    df_graph = pd.read_csv('data/df_graph_1.csv')
+    df_graph = pd.read_csv('data/df_graph_8.csv')
     # zip_file_path = 'data/graph_data_new.csv.zip'
     # extract_to_path = 'data'
     # csv_file_name = 'graph_data.csv'  # Optional: provide this if the ZIP contains multiple files or if you know the file name
