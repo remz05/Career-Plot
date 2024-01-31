@@ -49,6 +49,7 @@ def plot_peer_salary_path(dataframe ,user_input):
             if k in df.columns:
                 df = df[df[k] == v] 
     size = len(df)
+    st.write(f'size is :{size}')
     # Group by Data
     if len(df) < 10:
         #print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
@@ -78,7 +79,7 @@ def plot_peer_salary_path(dataframe ,user_input):
 
     # Add the "training sample does not have enough values" text as an annotation to the figure
     if size < 10:
-        st.write(f'size is :{size}')
+        
         st.write(f':orange[Our training sample does not have enough values for your specific profile but here is the most common career trajectory across all profiles]')
         
     #Set the axis labels and title
@@ -209,17 +210,17 @@ def app():
         gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
 
         
-        # try:
-        #     #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
-        #     grad_year_int = int(grad_year) if grad_year else 0
-        #     experience_int = int(experience) if experience else 0
-        # except ValueError:
-        #     st.error("Please enter valid integer values for graduation years and experience.")
-        #     return  # Stop further execution
+        try:
+            #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
+            grad_year_int = int(grad_year) if grad_year else 0
+            experience_int = int(experience) if experience else 0
+        except ValueError:
+            st.error("Please enter valid integer values for graduation years and experience.")
+            return  # Stop further execution
             
        
 
-        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender': gender.lower()})
+        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year_int, 'experience': experience_int, 'gender': gender.lower()})
 
 
         if user_input:
