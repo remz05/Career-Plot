@@ -273,6 +273,7 @@ if __name__ == '__main__':
     csv_file_name = 'graph_data.csv'  # Optional: provide this if the ZIP contains multiple files or if you know the file name
 
     df_graph = load_csv_from_zip(zip_file_path, extract_to_path, csv_file_name)
+    app()
     # current_dir = os.getcwd()
     # zip_path = os.path.join(current_dir, 'data', 'graph_data.csv.zip')
     # extract_path = os.path.join(current_dir, 'data')
@@ -283,4 +284,4 @@ if __name__ == '__main__':
     # #     zip_ref.extractall('data/')
         
     # df_graph = pd.read_csv('data/df_graph_new.csv')
-    # app()
+  
