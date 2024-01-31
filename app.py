@@ -18,54 +18,6 @@ def makePanel(df):
     return D
 
 
-# def plot_peer_salary_path(dataframe ,user_input):
-#     # This function takes in as input characteristics of a person.
-#     # Then it filters the peer group.
-#     # Then plots the peer groups avg. performance over time.
-    
-#     df = makePanel(dataframe)
-#     df = df[df['t'] <= 15]
-#     backup_df = df
-#     for k,v in user_input.items():
-#         if k != 'jobtitle' and v not in [None, "", 'select one', 'NaN','Type your response', 'type your response', 'Select one' ]:
-#             df = df[df[k] == v] 
-#     size = len(df)
-#     # Group by Data
-#     if len(df) < 10:
-#         print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
-#         df = pd.DataFrame(backup_df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index()) 
-#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
-#     else:
-#         df = pd.DataFrame(df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index())
-#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
-    
-#     fig = go.Figure()
-
-#     # # Add the mean line to the figure
-#     # fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'], mode='lines', line=dict(color='#B6E880', dash='dash'), name='Mean Salary'))
-
-#     # # Add the standard deviation fill to the figure
-#     # fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] - df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='Standard Deviation'))
-#     # fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] + df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='', showlegend=False, fill='tonexty'))
-
-#     # for i, title in enumerate(df['jobtitle_common']):
-#     #     if (i % 3) == 0:
-#     #         fig.add_annotation(x= df['t'][i], y=df['js_mean'][i], text=title, font=dict(size=12), yshift=-6000, showarrow=False)
-
-#     # # Add labels on the graph line at every third data point
-#     # n = 3 # interval of labels
-#     # for i in range(0, len(df), n):
-#     #     fig.add_annotation(x=df['t'][i], y=df['js_mean'][i], text=df['jobtitle_common'][i], font=dict(size=12), yshift=10, showarrow=False)
-
-#     # # Add the "training sample does not have enough values" text as an annotation to the figure
-#     # if size < 10:
-#     #     st.write(f':orange[Our training sample does not have enough values for your specific profile but here is the most common career trajectory across all profiles]')
-        
-#     # #Set the axis labels and title
-#     # fig.update_layout(xaxis_title='Years from Graduation', yaxis_title='Salary')
-
-#     # Show the plotly figure in Streamlit
-#     st.plotly_chart(fig)
 def plot_peer_salary_path(dataframe ,user_input):
     # This function takes in as input characteristics of a person.
     # Then it filters the peer group.
@@ -87,26 +39,74 @@ def plot_peer_salary_path(dataframe ,user_input):
         df = pd.DataFrame(df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index())
         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
     
-    plt.rcParams['figure.figsize'] = [10, 6]
-    plt.plot(df['t'],df['js_mean'], color = 'black', ls = '--')
-    plt.fill_between(df['t'],df['js_mean'] - df['js_std']*0.5,df['js_mean'] + df['js_std']*0.5,color = 'lightgray')
-    for index, row in df.iterrows():
-        if (int(row['t']) % 3) == 0:
-            plt.scatter(row['t'], row['js_mean'], color = 'black',s=20)
-            plt.text(row['t'], row['js_mean'] - 5000, row['jobtitle_common'], fontsize=15)
-    plt.xlabel('Years from Graduation')
-    plt.ylabel('Salary')
+    fig = go.Figure()
 
-    #plt.scatter([0],[79873],color = 'blue',s = 50)
-    #plt.text(0,81000, 'associate', fontsize=15)
-    #print(k)
+    # Add the mean line to the figure
+    fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'], mode='lines', line=dict(color='#B6E880', dash='dash'), name='Mean Salary'))
+
+    # Add the standard deviation fill to the figure
+    fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] - df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='Standard Deviation'))
+    fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] + df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='', showlegend=False, fill='tonexty'))
+
+    for i, title in enumerate(df['jobtitle_common']):
+        if (i % 3) == 0:
+            fig.add_annotation(x= df['t'][i], y=df['js_mean'][i], text=title, font=dict(size=12), yshift=-6000, showarrow=False)
+
+    # Add labels on the graph line at every third data point
+    n = 3 # interval of labels
+    for i in range(0, len(df), n):
+        fig.add_annotation(x=df['t'][i], y=df['js_mean'][i], text=df['jobtitle_common'][i], font=dict(size=12), yshift=10, showarrow=False)
+
+    # Add the "training sample does not have enough values" text as an annotation to the figure
     if size < 10:
-        plt.text(0, 60000, 'Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world',fontsize=12,color='red',
-         horizontalalignment='center',
-         verticalalignment='bottom',
-         bbox=dict(facecolor='yellow', edgecolor='black', alpha=0.5, pad=10))
+        st.write(f':orange[Our training sample does not have enough values for your specific profile but here is the most common career trajectory across all profiles]')
+        
+    #Set the axis labels and title
+    fig.update_layout(xaxis_title='Years from Graduation', yaxis_title='Salary')
 
-    plt.show()    
+    #Show the plotly figure in Streamlit
+    st.plotly_chart(fig)
+# def plot_peer_salary_path(dataframe ,user_input):
+#     # This function takes in as input characteristics of a person.
+#     # Then it filters the peer group.
+#     # Then plots the peer groups avg. performance over time.
+    
+#     df = makePanel(dataframe)
+#     df = df[df['t'] <= 15]
+#     backup_df = df
+#     for k,v in user_input.items():
+#         if k != 'jobtitle' and v not in [None, "", 'select one', 'NaN','Type your response', 'type your response', 'Select one' ]:
+#             df = df[df[k] == v] 
+#     size = len(df)
+#     # Group by Data
+#     if len(df) < 10:
+#         print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
+#         df = pd.DataFrame(backup_df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index()) 
+#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
+#     else:
+#         df = pd.DataFrame(df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index())
+#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
+    
+#     plt.rcParams['figure.figsize'] = [10, 6]
+#     plt.plot(df['t'],df['js_mean'], color = 'black', ls = '--')
+#     plt.fill_between(df['t'],df['js_mean'] - df['js_std']*0.5,df['js_mean'] + df['js_std']*0.5,color = 'lightgray')
+#     for index, row in df.iterrows():
+#         if (int(row['t']) % 3) == 0:
+#             plt.scatter(row['t'], row['js_mean'], color = 'black',s=20)
+#             plt.text(row['t'], row['js_mean'] - 5000, row['jobtitle_common'], fontsize=15)
+#     plt.xlabel('Years from Graduation')
+#     plt.ylabel('Salary')
+
+#     #plt.scatter([0],[79873],color = 'blue',s = 50)
+#     #plt.text(0,81000, 'associate', fontsize=15)
+#     #print(k)
+#     if size < 10:
+#         plt.text(0, 60000, 'Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world',fontsize=12,color='red',
+#          horizontalalignment='center',
+#          verticalalignment='bottom',
+#          bbox=dict(facecolor='yellow', edgecolor='black', alpha=0.5, pad=10))
+
+#     plt.show()    
     
 def app():
     st.set_page_config(layout="centered")
