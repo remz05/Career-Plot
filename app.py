@@ -210,17 +210,17 @@ def app():
         gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
 
         
-        try:
-            #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
-            grad_year_int = int(grad_year) if grad_year else 0
-            experience_int = int(experience) if experience else 0
-        except ValueError:
-            st.error("Please enter valid integer values for graduation years and experience.")
-            return  # Stop further execution
+        # try:
+        #     #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
+        #     grad_year_int = int(grad_year) if grad_year else 0
+        #     experience_int = int(experience) if experience else 0
+        # except ValueError:
+        #     st.error("Please enter valid integer values for graduation years and experience.")
+        #     return  # Stop further execution
             
        
 
-        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year_int, 'experience': experience_int, 'gender': gender.lower()})
+        user_input = ({'mba_school': mba_school.lower(), 'grad_year':int(grad_year), 'experience': int(experience), 'gender': gender.lower()})
 
 
         if user_input:
