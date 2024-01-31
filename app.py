@@ -5,6 +5,7 @@ from PIL import Image
 import plotly.graph_objs as go
 import zipfile
 import numpy as np
+import os
 
 def makePanel(df):
     """this function creates a row for each year a person has been on a job and creates a new column 't' which calculates the number of years it took to reach that job after mba graduation"""
@@ -16,6 +17,23 @@ def makePanel(df):
     D['t'] = D['T'] - D['grad_year']
     D = D.sort_values(['id','t'])
     return D
+    
+def load_csv_from_zip(zip_path, extract_path, csv_file_name=None):
+    # Extract the ZIP file
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_path)
+
+    # If the CSV file name is not provided, assume the ZIP contains only one file and get its name
+    if csv_file_name is None:
+        with zip_ref.open(zip_ref.namelist()[0]) as file:
+            df = pd.read_csv(file)
+    else:
+        # Construct the full path to the extracted CSV file
+        csv_file_path = os.path.join(extract_path, csv_file_name)
+        # Load the CSV file into a DataFrame
+        df = pd.read_csv(csv_file_path)
+
+    return df
 
 
 def plot_peer_salary_path(dataframe ,user_input):
@@ -250,8 +268,19 @@ def app():
     
 if __name__ == '__main__':
     df = pd.read_csv('data/job_salary.csv')
-    # with zipfile.ZipFile('data/graph_data.csv.zip', 'r') as zip_ref:
-    #     zip_ref.extractall('data/')
+    zip_file_path = 'data/graph_data.csv.zip'
+    extract_to_path = 'data'
+    csv_file_name = 'graph_data.csv'  # Optional: provide this if the ZIP contains multiple files or if you know the file name
+
+    df_graph = load_csv_from_zip(zip_file_path, extract_to_path, csv_file_name)
+    # current_dir = os.getcwd()
+    # zip_path = os.path.join(current_dir, 'data', 'graph_data.csv.zip')
+    # extract_path = os.path.join(current_dir, 'data')
+
+    # with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    #     zip_ref.extractall(extract_path)
+    # # with zipfile.ZipFile('data/graph_data.csv.zip', 'r') as zip_ref:
+    # #     zip_ref.extractall('data/')
         
-    df_graph = pd.read_csv('data/df_graph_new.csv')
-    app()
+    # df_graph = pd.read_csv('data/df_graph_new.csv')
+    # app()
