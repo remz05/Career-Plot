@@ -199,15 +199,15 @@ def app():
             
        
 
-        # user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': ug_grad_year_int, 'mba_school': mba_school.lower(), 'grad_year':grad_year_int, 'experience': experience_int, 'gender': gender})
+        user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': ug_grad_year_int, 'mba_school': mba_school.lower(), 'grad_year':grad_year_int, 'experience': experience_int, 'gender': gender})
 
 
-        # if user_input:
-        #     try:
-        #         plot_peer_salary_path(df_graph, user_input)
+        if user_input:
+            try:
+                plot_peer_salary_path(df_graph, user_input)
                 
-        #     except Exception as e:  # Catching any exception
-        #         st.write(f'An error occurred: {e}')
+            except Exception as e:  # Catching any exception
+                st.write(f'An error occurred: {e}')
       
     if active_tab == "Machine Learning behind Career Plot":
         
