@@ -181,21 +181,6 @@ def app():
     
 if __name__ == '__main__':
     df = pd.read_csv('data/job_salary.csv')
-    df_graph = pd.read_csv('data/df_graph_8.csv')
-    # zip_file_path = 'data/graph_data_new.csv.zip'
-    # extract_to_path = 'data'
-    # csv_file_name = 'graph_data.csv'  # Optional: provide this if the ZIP contains multiple files or if you know the file name
-
-    # df_graph = load_csv_from_zip(zip_file_path, extract_to_path,csv_file_name)
+    df_graph = pd.read_csv('data/df_graph_9.csv')
+    
     app()
-    # current_dir = os.getcwd()
-    # zip_path = os.path.join(current_dir, 'data', 'graph_data.csv.zip')
-    # extract_path = os.path.join(current_dir, 'data')
-
-    # with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-    #     zip_ref.extractall(extract_path)
-    # # with zipfile.ZipFile('data/graph_data.csv.zip', 'r') as zip_ref:
-    # #     zip_ref.extractall('data/')
-        
-    # df_graph = pd.read_csv('data/df_graph_new.csv')
-  
