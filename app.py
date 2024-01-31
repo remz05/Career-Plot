@@ -45,8 +45,9 @@ def plot_peer_salary_path(dataframe ,user_input):
     df = df[df['t'] <= 15]
     backup_df = df
     for k,v in user_input.items():
-        if k != 'jobtitle' and v not in [None, "", 'select one', 'NaN','Type your response', 'type your response', 'Select one' ]:
-            df = df[df[k] == v] 
+        if v not in [None, "", 'select one', 'NaN','Type your response', 'type your response', 'Select one' ]:
+            if k in df.columns:
+                df = df[df[k] == v] 
     size = len(df)
     # Group by Data
     if len(df) < 10:
