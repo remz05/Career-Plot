@@ -178,7 +178,7 @@ def app():
         #st.write(f'')
         gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
 
-        user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': float(ug_grad_year), 'mba_school': mba_school.lower(), 'grad_year':float(grad_year), 'experience': int(experience), 'gender': gender})
+        user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': ug_grad_year, 'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender': gender})
 
 
         if user_input:
