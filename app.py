@@ -50,7 +50,7 @@ def plot_peer_salary_path(dataframe ,user_input):
     size = len(df)
     # Group by Data
     if len(df) < 10:
-        print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
+        #print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
         df = pd.DataFrame(backup_df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index()) 
         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
     else:
