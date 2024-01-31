@@ -250,8 +250,8 @@ def app():
     
 if __name__ == '__main__':
     df = pd.read_csv('data/job_salary.csv')
-    with zipfile.ZipFile('data/graph_data.csv.zip', 'r') as zip_ref:
-        zip_ref.extractall('data/')
+    # with zipfile.ZipFile('data/graph_data.csv.zip', 'r') as zip_ref:
+    #     zip_ref.extractall('data/')
         
-    df_graph = pd.read_csv('data/graph_data.csv')
+    df_graph = pd.read_csv('data/graph_small.csv')
     app()
