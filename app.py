@@ -176,7 +176,7 @@ def app():
         
         st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
         #st.write(f'')
-        st.write(f'The career graph changes as you type in more information about a profile.)
+        st.write(f'The career graph changes as you type in more information about a profile.')
         # #industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
         #        'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
         #        'Art', 'Operations', 'Military', 'Analytics', 'Other'))
