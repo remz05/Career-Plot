@@ -145,8 +145,8 @@ def app():
            
         
     if active_tab == "Career Trajectory":
-        user_input = ({'industry_category': 'finance', 'ug_school': 'the ohio state university', 'ug_degree': 'science', 'ug_grad_year': '2009', 'mba_school': 'georgia state university', 'grad_year':'2012', 'experience': '3', 'gender': 'male'})
-        plot_peer_salary_path(df_graph, user_input)
+       user_input = {'ug_degree': 'arts', 'mba_school':'harvard business school', 'industry_category': '' , 'experience': 1 }
+       plot_peer_salary_path(df_graph, user_input)
         
         
         # st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
