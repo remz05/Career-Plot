@@ -17,23 +17,6 @@ def makePanel(df):
     D['t'] = D['T'] - D['grad_year']
     D = D.sort_values(['id','t'])
     return D
-    
-# def load_csv_from_zip(zip_path, extract_path, csv_file_name=None):
-#     # Extract the ZIP file
-#     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-#         zip_ref.extractall(extract_path)
-
-#     # If the CSV file name is not provided, assume the ZIP contains only one file and get its name
-#     if csv_file_name is None:
-#         with zip_ref.open(zip_ref.namelist()[0]) as file:
-#             df = pd.read_csv(file)
-#     else:
-#         # Construct the full path to the extracted CSV file
-#         csv_file_path = os.path.join(extract_path, csv_file_name)
-#         # Load the CSV file into a DataFrame
-#         df = pd.read_csv(csv_file_path)
-
-#     return df
 
 
 def plot_peer_salary_path(dataframe ,user_input):
@@ -49,7 +32,7 @@ def plot_peer_salary_path(dataframe ,user_input):
             if k in df.columns:
                 df = df[df[k].astype(str) == v] 
     size = len(df)
-    st.write(f'size is :{size}')
+    #st.write(f'size is :{size}')
     # Group by Data
     if len(df) < 10:
         #print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
@@ -87,47 +70,7 @@ def plot_peer_salary_path(dataframe ,user_input):
 
     #Show the plotly figure in Streamlit
     st.plotly_chart(fig)
-# def plot_peer_salary_path(dataframe ,user_input):
-#     # This function takes in as input characteristics of a person.
-#     # Then it filters the peer group.
-#     # Then plots the peer groups avg. performance over time.
-    
-#     df = makePanel(dataframe)
-#     df = df[df['t'] <= 15]
-#     backup_df = df
-#     for k,v in user_input.items():
-#         if k != 'jobtitle' and v not in [None, "", 'select one', 'NaN','Type your response', 'type your response', 'Select one' ]:
-#             df = df[df[k] == v] 
-#     size = len(df)
-#     # Group by Data
-#     if len(df) < 10:
-#         print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
-#         df = pd.DataFrame(backup_df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index()) 
-#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
-#     else:
-#         df = pd.DataFrame(df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index())
-#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
-    
-#     plt.rcParams['figure.figsize'] = [10, 6]
-#     plt.plot(df['t'],df['js_mean'], color = 'black', ls = '--')
-#     plt.fill_between(df['t'],df['js_mean'] - df['js_std']*0.5,df['js_mean'] + df['js_std']*0.5,color = 'lightgray')
-#     for index, row in df.iterrows():
-#         if (int(row['t']) % 3) == 0:
-#             plt.scatter(row['t'], row['js_mean'], color = 'black',s=20)
-#             plt.text(row['t'], row['js_mean'] - 5000, row['jobtitle_common'], fontsize=15)
-#     plt.xlabel('Years from Graduation')
-#     plt.ylabel('Salary')
 
-#     #plt.scatter([0],[79873],color = 'blue',s = 50)
-#     #plt.text(0,81000, 'associate', fontsize=15)
-#     #print(k)
-#     if size < 10:
-#         plt.text(0, 60000, 'Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world',fontsize=12,color='red',
-#          horizontalalignment='center',
-#          verticalalignment='bottom',
-#          bbox=dict(facecolor='yellow', edgecolor='black', alpha=0.5, pad=10))
-
-#     plt.show()    
     
 def app():
     st.set_page_config(layout="centered")
@@ -153,48 +96,27 @@ def app():
             try:
                 salary = int(df[df['clean_jobtitle'] == job_title.lower()]['jobSalary'].values)
                 #st.write(f'')
-                message = f"<span style='font-size: 24px; color: #ADD8E6;'>The salary for {job_title} is ${salary}</span>"
+                message = f"<span style='font-size: 24px; color: #ADD8E6;'>The predicted salary for {job_title} is ${salary}</span>"
                 st.write(message, unsafe_allow_html=True)
                 #st.write(f'')
                 #st.write(f'')
                 st.write(f'Beyond salary the site provides user-friendly interface that allows users to input their personal and professional information to explore different career paths. Go to the **:blue[Career Trajectory]** page in the left sidebar for more.')
                 
             except TypeError:
-                st.write(f'Sorry, the job title provided is very specific, request you to type a more general title.')  
+                st.write(f'Sorry, the job title provided is either too specific or not in our database, request you to type a more general title.')  
         
 
             
            
         
     if active_tab == "Career Trajectory":
-       # user_input = {'ug_degree': 'arts', 'mba_school':'harvard business school', 'industry_category': 'Type your response', 'experience': 1 }
-
-       # if user_input:
-       #     try:
-       #         plot_peer_salary_path(df_graph, user_input)
-       #     except Exception as e:  # Catching any exception
-       #          st.write(f'An error occurred: {e}')
-       
+      
         
         
         st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
-        #st.write(f'')
-        st.write(f'The career graph changes as you type in more information about a profile.')
-        # #industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
-        #        'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
-        #        'Art', 'Operations', 'Military', 'Analytics', 'Other'))
-        #st.write(f'')
-        # st.write(f'Undergraduate Education')
-        # col1, col2, col3 = st.columns(3)
-        # with col1:
-        #     ug_school = st.text_input('UG School', placeholder= 'Type your response')
-         
-        # with col2:
-        #     ug_degree = st.selectbox('Specialisation',('Select one','Science', 'Arts', 'Business', 'Other'))
         
-        # with col3:
-        #     ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', key='grad_year_input', placeholder= 'Type your response')
-        #st.write(f'') 
+        st.write(f'The career graph changes as you type in more information about a profile.')
+
         st.write(f'Postgraduate Education')
         col1, col2 = st.columns([2,1])   
         with col1:
@@ -202,21 +124,9 @@ def app():
         with col2:
             grad_year = st.text_input('Completion Year (Format: YYYY)', key='post_grad_year_input', placeholder= 'Type your response')
             
-            
-            
-        #st.write(f'')
         experience = st.text_input('Years of work experience since your post-graduation  (Format: Integer)', placeholder= 'Type your response')
-        #st.write(f'')
+      
         gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
-
-        
-        # try:
-        #     #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
-        #     grad_year_int = int(grad_year) if grad_year else 0
-        #     experience_int = int(experience) if experience else 0
-        # except ValueError:
-        #     st.error("Please enter valid integer values for graduation years and experience.")
-        #     return  # Stop further execution
             
        
 
