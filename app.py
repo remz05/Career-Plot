@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 from PIL import Image
 import plotly.graph_objs as go
 import zipfile
+import numpy as np
 
 def makePanel(df):
     """this function creates a row for each year a person has been on a job and creates a new column 't' which calculates the number of years it took to reach that job after mba graduation"""
@@ -17,6 +18,54 @@ def makePanel(df):
     return D
 
 
+# def plot_peer_salary_path(dataframe ,user_input):
+#     # This function takes in as input characteristics of a person.
+#     # Then it filters the peer group.
+#     # Then plots the peer groups avg. performance over time.
+    
+#     df = makePanel(dataframe)
+#     df = df[df['t'] <= 15]
+#     backup_df = df
+#     for k,v in user_input.items():
+#         if k != 'jobtitle' and v not in [None, "", 'select one', 'NaN','Type your response', 'type your response', 'Select one' ]:
+#             df = df[df[k] == v] 
+#     size = len(df)
+#     # Group by Data
+#     if len(df) < 10:
+#         print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
+#         df = pd.DataFrame(backup_df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index()) 
+#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
+#     else:
+#         df = pd.DataFrame(df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index())
+#         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
+    
+#     fig = go.Figure()
+
+#     # Add the mean line to the figure
+#     fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'], mode='lines', line=dict(color='#B6E880', dash='dash'), name='Mean Salary'))
+
+#     # Add the standard deviation fill to the figure
+#     fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] - df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='Standard Deviation'))
+#     fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] + df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='', showlegend=False, fill='tonexty'))
+
+#     for i, title in enumerate(df['jobtitle_common']):
+#         if (i % 3) == 0:
+#             fig.add_annotation(x= df['t'][i], y=df['js_mean'][i], text=title, font=dict(size=12), yshift=-6000, showarrow=False)
+
+#     # Add labels on the graph line at every third data point
+#     n = 3 # interval of labels
+#     for i in range(0, len(df), n):
+#         fig.add_annotation(x=df['t'][i], y=df['js_mean'][i], text=df['jobtitle_common'][i], font=dict(size=12), yshift=10, showarrow=False)
+
+#     # Add the "training sample does not have enough values" text as an annotation to the figure
+#     if size < 10:
+#         st.write(f':orange[Our training sample does not have enough values for your specific profile but here is the most common career trajectory across all profiles]')
+        
+#     # Set the axis labels and title
+#     fig.update_layout(xaxis_title='Years from Graduation', yaxis_title='Salary')
+
+#     # Show the plotly figure in Streamlit
+#     st.plotly_chart(fig)
 def plot_peer_salary_path(dataframe ,user_input):
     # This function takes in as input characteristics of a person.
     # Then it filters the peer group.
@@ -31,41 +80,33 @@ def plot_peer_salary_path(dataframe ,user_input):
     size = len(df)
     # Group by Data
     if len(df) < 10:
-        print('Our training sample does not have enough values your specific profile but here is the most common career trajectory in the corporate world')
+        print('Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world')
         df = pd.DataFrame(backup_df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index()) 
         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
     else:
         df = pd.DataFrame(df.groupby('t').agg({'jobSalary':['mean','std'],'jobtitle':lambda x: x.value_counts().index[0]}).reset_index())
         df.columns = ['t', 'js_mean', 'js_std', 'jobtitle_common']
     
-    fig = go.Figure()
+    plt.rcParams['figure.figsize'] = [10, 6]
+    plt.plot(df['t'],df['js_mean'], color = 'black', ls = '--')
+    plt.fill_between(df['t'],df['js_mean'] - df['js_std']*0.5,df['js_mean'] + df['js_std']*0.5,color = 'lightgray')
+    for index, row in df.iterrows():
+        if (int(row['t']) % 3) == 0:
+            plt.scatter(row['t'], row['js_mean'], color = 'black',s=20)
+            plt.text(row['t'], row['js_mean'] - 5000, row['jobtitle_common'], fontsize=15)
+    plt.xlabel('Years from Graduation')
+    plt.ylabel('Salary')
 
-    # Add the mean line to the figure
-    fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'], mode='lines', line=dict(color='#B6E880', dash='dash'), name='Mean Salary'))
-
-    # Add the standard deviation fill to the figure
-    fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] - df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='Standard Deviation'))
-    fig.add_trace(go.Scatter(x=df['t'], y=df['js_mean'] + df['js_std'] * 0.5, mode='lines', line=dict(color='#FFA15A'), name='', showlegend=False, fill='tonexty'))
-
-    for i, title in enumerate(df['jobtitle_common']):
-        if (i % 3) == 0:
-            fig.add_annotation(x= df['t'][i], y=df['js_mean'][i], text=title, font=dict(size=12), yshift=-6000, showarrow=False)
-
-    # Add labels on the graph line at every third data point
-    n = 3 # interval of labels
-    for i in range(0, len(df), n):
-        fig.add_annotation(x=df['t'][i], y=df['js_mean'][i], text=df['jobtitle_common'][i], font=dict(size=12), yshift=10, showarrow=False)
-
-    # Add the "training sample does not have enough values" text as an annotation to the figure
+    plt.scatter([0],[79873],color = 'blue',s = 50)
+    #plt.text(0,81000, 'associate', fontsize=15)
+    print(k)
     if size < 10:
-        st.write(f':orange[Our training sample does not have enough values for your specific profile but here is the most common career trajectory across all profiles]')
-        
-    # Set the axis labels and title
-    fig.update_layout(xaxis_title='Years from Graduation', yaxis_title='Salary')
+        plt.text(0, 60000, 'Our training sample does not have enough values for your specific profile but here is the most common career trajectory in the corporate world',fontsize=12,color='red',
+         horizontalalignment='center',
+         verticalalignment='bottom',
+         bbox=dict(facecolor='yellow', edgecolor='black', alpha=0.5, pad=10))
 
-    # Show the plotly figure in Streamlit
-    st.plotly_chart(fig)
-    
+    plt.show()    
 def app():
     st.set_page_config(layout="centered")
     
@@ -104,49 +145,48 @@ def app():
            
         
     if active_tab == "Career Trajectory":
-        user_input = ({'industry_category': 'finance', 'ug_school': 'the ohio state university', 'ug_degree': 'science', 'ug_grad_year': '2009', 'mba_school': 'georgia state university', 'grad_year':'2012', 'experience': '3', 'gender': 'male'})
-        plot_peer_salary_path(df_graph, user_input)
-    #     st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
-    #     #st.write(f'')
-    #     st.write(f'The career graph changes as you type in more information about a profile. It is highly recommended to fill **:blue[Industry]** and **:blue[UG Specialization]** fields')
-    #     industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
-    #            'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
-    #            'Art', 'Operations', 'Military', 'Analytics', 'Other'))
-    #     #st.write(f'')
-    #     st.write(f'Undergraduate Education')
-    #     col1, col2, col3 = st.columns(3)
-    #     with col1:
-    #         ug_school = st.text_input('UG School', placeholder= 'Type your response')
-         
-    #     with col2:
-    #         ug_degree = st.selectbox('Specialisation',('Select one','Science', 'Arts', 'Business', 'Other'))
         
-    #     with col3:
-    #         ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', key='grad_year_input', placeholder= 'Type your response')
-    #     #st.write(f'') 
-    #     st.write(f'Postgraduate Education')
-    #     col1, col2 = st.columns([2,1])   
-    #     with col1:
-    #         mba_school = st.text_input('PG School  (eg: Harvard Business School)', placeholder= 'Type your response')
-    #     with col2:
-    #         grad_year = st.text_input('Completion Year (Format: YYYY)', key='post_grad_year_input', placeholder= 'Type your response')
+        st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
+        #st.write(f'')
+        st.write(f'The career graph changes as you type in more information about a profile. It is highly recommended to fill **:blue[Industry]** and **:blue[UG Specialization]** fields')
+        industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
+               'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
+               'Art', 'Operations', 'Military', 'Analytics', 'Other'))
+        #st.write(f'')
+        st.write(f'Undergraduate Education')
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            ug_school = st.text_input('UG School', placeholder= 'Type your response')
+         
+        with col2:
+            ug_degree = st.selectbox('Specialisation',('Select one','Science', 'Arts', 'Business', 'Other'))
+        
+        with col3:
+            ug_grad_year = st.text_input('Completion Year  (Format: YYYY)', key='grad_year_input', placeholder= 'Type your response')
+        #st.write(f'') 
+        st.write(f'Postgraduate Education')
+        col1, col2 = st.columns([2,1])   
+        with col1:
+            mba_school = st.text_input('PG School  (eg: Harvard Business School)', placeholder= 'Type your response')
+        with col2:
+            grad_year = st.text_input('Completion Year (Format: YYYY)', key='post_grad_year_input', placeholder= 'Type your response')
             
             
             
-    #     #st.write(f'')
-    #     experience = st.text_input('Years of work experience since your post-graduation  (Format: Integer)', placeholder= 'Type your response')
-    #     #st.write(f'')
-    #     gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
+        #st.write(f'')
+        experience = st.text_input('Years of work experience since your post-graduation  (Format: Integer)', placeholder= 'Type your response')
+        #st.write(f'')
+        gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
 
-    #     user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': ug_grad_year, 'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender' : gender})
+        user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': float(ug_grad_year), 'mba_school': mba_school.lower(), 'grad_year':float(grad_year), 'experience': int(experience), 'gender': gender})
 
 
-    #     if user_input:
-    #         try:
-    #             plot_peer_salary_path(df_graph, user_input)
+        if user_input:
+            try:
+                plot_peer_salary_path(df_graph, user_input)
                 
-    #         except TypeError:
-    #             st.write(f'Fill in all details')
+            except Exception as e:  # Catching any exception
+                st.write(f'An error occurred: {e}')
       
     if active_tab == "Machine Learning behind Career Plot":
         
