@@ -220,7 +220,7 @@ def app():
             
        
 
-        user_input = ({'mba_school': mba_school.lower(), 'grad_year':int(grad_year), 'experience': int(experience), 'gender': gender.lower()})
+        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender': gender.lower()})
 
 
         if user_input:
