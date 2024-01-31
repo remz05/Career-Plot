@@ -18,22 +18,22 @@ def makePanel(df):
     D = D.sort_values(['id','t'])
     return D
     
-def load_csv_from_zip(zip_path, extract_path, csv_file_name=None):
-    # Extract the ZIP file
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(extract_path)
+# def load_csv_from_zip(zip_path, extract_path, csv_file_name=None):
+#     # Extract the ZIP file
+#     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+#         zip_ref.extractall(extract_path)
 
-    # If the CSV file name is not provided, assume the ZIP contains only one file and get its name
-    if csv_file_name is None:
-        with zip_ref.open(zip_ref.namelist()[0]) as file:
-            df = pd.read_csv(file)
-    else:
-        # Construct the full path to the extracted CSV file
-        csv_file_path = os.path.join(extract_path, csv_file_name)
-        # Load the CSV file into a DataFrame
-        df = pd.read_csv(csv_file_path)
+#     # If the CSV file name is not provided, assume the ZIP contains only one file and get its name
+#     if csv_file_name is None:
+#         with zip_ref.open(zip_ref.namelist()[0]) as file:
+#             df = pd.read_csv(file)
+#     else:
+#         # Construct the full path to the extracted CSV file
+#         csv_file_path = os.path.join(extract_path, csv_file_name)
+#         # Load the CSV file into a DataFrame
+#         df = pd.read_csv(csv_file_path)
 
-    return df
+#     return df
 
 
 def plot_peer_salary_path(dataframe ,user_input):
@@ -268,11 +268,12 @@ def app():
     
 if __name__ == '__main__':
     df = pd.read_csv('data/job_salary.csv')
-    zip_file_path = 'data/graph_data_new.csv.zip'
-    extract_to_path = 'data'
-    csv_file_name = 'graph_data.csv'  # Optional: provide this if the ZIP contains multiple files or if you know the file name
+    df_graph = pd.read_csv('data/df_graph_1.csv')
+    # zip_file_path = 'data/graph_data_new.csv.zip'
+    # extract_to_path = 'data'
+    # csv_file_name = 'graph_data.csv'  # Optional: provide this if the ZIP contains multiple files or if you know the file name
 
-    df_graph = load_csv_from_zip(zip_file_path, extract_to_path,csv_file_name)
+    # df_graph = load_csv_from_zip(zip_file_path, extract_to_path,csv_file_name)
     app()
     # current_dir = os.getcwd()
     # zip_path = os.path.join(current_dir, 'data', 'graph_data.csv.zip')
