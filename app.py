@@ -253,5 +253,5 @@ if __name__ == '__main__':
     # with zipfile.ZipFile('data/graph_data.csv.zip', 'r') as zip_ref:
     #     zip_ref.extractall('data/')
         
-    df_graph = pd.read_csv('data/df_graph_small.csv')
+    df_graph = pd.read_csv('data/df_graph_new.csv')
     app()
