@@ -47,7 +47,7 @@ def plot_peer_salary_path(dataframe ,user_input):
     for k,v in user_input.items():
         if v not in [None, "", 'select one', 'NaN','Type your response', 'type your response', 'Select one' ]:
             if k in df.columns:
-                df = df[df[k] == str(v)] 
+                df = df[str(df[k]) == v] 
     size = len(df)
     st.write(f'size is :{size}')
     # Group by Data
