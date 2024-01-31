@@ -177,7 +177,10 @@ def app():
         experience = st.text_input('Years of work experience since your post-graduation  (Format: Integer)', placeholder= 'Type your response')
         #st.write(f'')
         gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
-        
+
+        if industry_category == 'Select one': industry_category = ''
+        if ug_degree == 'Select one': ug_degree = ''
+        if gender == 'Select one': gender = ''
         try:
             ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
             grad_year_int = int(grad_year) if grad_year else 0
@@ -186,10 +189,7 @@ def app():
             st.error("Please enter valid integer values for graduation years and experience.")
             return  # Stop further execution
             
-            
-        if industry_category == 'Select one': industry_category = ''
-        if ug_degree == 'Select one': ug_degree = ''
-        if gender == 'Select one': gender = ''
+       
 
         user_input = ({'industry_category': industry_category.lower(), 'ug_school': ug_school.lower(), 'ug_degree': ug_degree.lower(), 'ug_grad_year': int(ug_grad_year), 'mba_school': mba_school.lower(), 'grad_year':int(grad_year), 'experience': int(experience), 'gender': gender})
 
