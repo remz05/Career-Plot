@@ -176,7 +176,7 @@ def app():
         
         st.write(f'**:gray[Curious about career trajectories of professionals with the same profile as you? Tell us more.]**')
         #st.write(f'')
-        st.write(f'The career graph changes as you type in more information about a profile. It is highly recommended to fill **:blue[Industry]** and **:blue[UG Specialization]** fields')
+        st.write(f'The career graph changes as you type in more information about a profile.)
         # #industry_category = st.selectbox('Industry',( 'Select one', 'Computers', 'Entertainment', 'Retail', 'Finance', 'Management',
         #        'Engineering', 'Science', 'Healthcare', 'Legal', 'Electronics',
         #        'Art', 'Operations', 'Military', 'Analytics', 'Other'))
@@ -207,17 +207,17 @@ def app():
         gender = st.selectbox('Gender',('Select one', 'Male', 'Female', 'Non-Binary'))
 
         
-        try:
-            #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
-            grad_year_int = int(grad_year) if grad_year else 0
-            experience_int = int(experience) if experience else 0
-        except ValueError:
-            st.error("Please enter valid integer values for graduation years and experience.")
-            return  # Stop further execution
+        # try:
+        #     #ug_grad_year_int = int(ug_grad_year) if ug_grad_year else 0
+        #     grad_year_int = int(grad_year) if grad_year else 0
+        #     experience_int = int(experience) if experience else 0
+        # except ValueError:
+        #     st.error("Please enter valid integer values for graduation years and experience.")
+        #     return  # Stop further execution
             
        
 
-        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year_int, 'experience': experience_int, 'gender': gender})
+        user_input = ({'mba_school': mba_school.lower(), 'grad_year':grad_year, 'experience': experience, 'gender': gender})
 
 
         if user_input:
