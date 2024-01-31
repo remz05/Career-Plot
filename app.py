@@ -146,7 +146,7 @@ def app():
            
         
     if active_tab == "Career Trajectory":
-       user_input = {'jobtitle': 'associate', 'ug_degree': 'arts', 'mba_school':'harvard business school', 'industry_category': 'Type your response' , 'experience': 1 }
+       user_input = {'ug_degree': 'arts', 'mba_school':'harvard business school', 'industry_category': 'Type your response', 'experience': 1 }
 
        if user_input:
            try:
