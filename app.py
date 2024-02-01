@@ -181,6 +181,6 @@ def app():
     
 if __name__ == '__main__':
     df = pd.read_csv('data/job_salary.csv')
-    df_graph = pd.read_csv('data/df_graph_9.csv')
+    df_graph = pd.read_csv('data/df_graph_8.csv')
     
     app()
